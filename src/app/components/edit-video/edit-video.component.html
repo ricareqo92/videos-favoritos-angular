@@ -1,0 +1,27 @@
+<div class="col-md-12 mt-3">
+    <h1>{{page_title}}</h1>
+    <div *ngIf="status == 'success'" class="alert alert-success col-md-5 mt-3">
+        El video se ha actualizado correctamente
+    </div>
+    <div *ngIf="status == 'error'" class="alert alert-danger col-md-5 mt-3">
+        Ha ocurrido un error al actualizar el video
+    </div>
+    <form class="col-md-5 mt-3" #editForm="ngForm" (ngSubmit)="onSubmit(editForm)">
+        <div class="form-group">
+            <label for="title">Título</label>
+            <input class="form-control" type="text" name="title" #title="ngModel" [(ngModel)]="video.title" required>
+            <span *ngIf="title.invalid && title.touched" class="invalid-feedback d-block">El título no es válido</span>
+        </div>
+        <div class="form-group">
+            <label for="description">Descripción</label>
+            <textarea class="form-control" name="description" #description="ngModel" [(ngModel)]="video.description" required></textarea>
+            <span *ngIf="description.invalid && description.touched" class="invalid-feedback d-block">La descripción no es válida</span>
+        </div>
+        <div class="form-group">
+            <label for="url">Url de video de YouTube</label>
+            <input class="form-control" type="text" name="url" #url="ngModel" [(ngModel)]="video.url" required>
+            <span *ngIf="url.invalid && url.touched" class="invalid-feedback d-block">La url no es válida</span>
+        </div>
+        <input type="submit" value="guardar" class="btn btn-success" [disabled]="editForm.invalid">
+    </form>
+</div>
